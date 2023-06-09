@@ -87,6 +87,33 @@ namespace AddressBook
             {
                 Console.WriteLine("Contact not found.");
             }
+            
+        }
+
+        public void DeleteContact()
+        {
+            if(contact != null)
+            {
+                Console.WriteLine("Enter the first name of the contact you want to delete:");
+                string firstNameToEdit = Console.ReadLine();
+                Console.WriteLine("Enter the last name of the contact you want to delete:");
+                string lastNameToEdit = Console.ReadLine();
+
+                if (contact != null && contact.firstName == firstNameToEdit && contact.lastName == lastNameToEdit)
+                {
+                    this.contact = null;
+                    Console.Write("\nDeleted Successfully!\n");
+                }
+                else
+                {
+                    Console.Write("\nNo such person found!\n");
+                }
+            }
+            else
+            {
+                Console.Write("\nNo such person found!\n");
+            }
+
             Console.ReadLine();
         }
     }

@@ -16,6 +16,7 @@ namespace AddressBook
             addressBookAdd.AddContact();
             addressBookAdd.DisplayAdd();
             addressBookAdd.EditContact();
+            addressBookAdd.DeleteContact();
         }
     }
 
