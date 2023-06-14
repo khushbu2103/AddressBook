@@ -11,8 +11,48 @@ namespace AddressBook
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to the Address Book Program!");
-            AddressBookAdd addressBook = new AddressBookAdd();
+            AddressBookManager addressBookManager = new AddressBookManager();
 
+
+            while (true)
+            {
+                Console.WriteLine("\nChoose an option:");
+                Console.WriteLine("1. Add an address book");
+                Console.WriteLine("2. Display all address books");
+                Console.WriteLine("3. Manage an address book");
+                Console.WriteLine("4. Exit");
+                int option = Convert.ToInt32(Console.ReadLine());
+
+                switch (option)
+                {
+                    case 1:
+                        Console.WriteLine("Enter the name of the new address book:");
+                        string name = Console.ReadLine();
+                        addressBookManager.AddAddressBook(name);
+                        break;
+                    case 2:
+                        addressBookManager.DisplayAllAddressBooks();
+                        break;
+                    case 3:
+                        Console.WriteLine("Enter the name of the address book you want to manage:");
+                        string nameToManage = Console.ReadLine();
+                        AddressBookAdd addressBookToManage = addressBookManager.GetAddressBook(nameToManage);
+                        if (addressBookToManage != null)
+                        {
+                            ManageAddressBook(addressBookToManage);
+                        }
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        Console.WriteLine("Invalid option. Please try again.");
+                        break;
+                }
+            }
+        }
+
+        static void ManageAddressBook(AddressBookAdd addressBook)
+        {
             while (true)
             {
                 Console.WriteLine("\nChoose an option:");
@@ -44,8 +84,7 @@ namespace AddressBook
                         break;
                 }
             }
+
         }
     }
-
-   
 }

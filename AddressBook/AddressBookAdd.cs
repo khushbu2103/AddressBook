@@ -8,7 +8,7 @@ namespace AddressBook
 {
     internal class AddressBookAdd
     {
-        public Contact contact;
+       // public Contact contact;
 
         public List<Contact> contacts;
 
@@ -40,16 +40,23 @@ namespace AddressBook
 
         public void DisplayAdd()
         {
-            if(contact != null)
+            if (contacts.Count > 0)
             {
-                Console.WriteLine($"first Name: {contact.firstName}");
-                Console.WriteLine($"last Name: {contact.lastName}");
-                Console.WriteLine($"Address: {contact.address}");
-                Console.WriteLine($"City: {contact.city}");
-                Console.WriteLine($"State: {contact.state}");
-                Console.WriteLine($"Zip Code: {contact.zipCode}");
-                Console.WriteLine($"Phone Number: {contact.phoneNumber}");
-                Console.WriteLine($"Email: {contact.email}");
+                foreach (Contact person in contacts)
+                {
+                    Console.WriteLine($"first Name: {person.firstName}");
+                    Console.WriteLine($"last Name: {person.lastName}");
+                    Console.WriteLine($"Address: {person.address}");
+                    Console.WriteLine($"City: {person.city}");
+                    Console.WriteLine($"State: {person.state}");
+                    Console.WriteLine($"Zip Code: {person.zipCode}");
+                    Console.WriteLine($"Phone Number: {person.phoneNumber}");
+                    Console.WriteLine($"Email: {person.email}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("there are no contact present in this adress book");
             }
         }
 
@@ -60,7 +67,9 @@ namespace AddressBook
             Console.WriteLine("Enter the last name of the contact you want to edit:");
             string lastNameToEdit = Console.ReadLine();
 
-            if (contact != null && contact.firstName == firstNameToEdit && contact.lastName == lastNameToEdit)
+            Contact contactToEdit = SearchContact(firstNameToEdit, lastNameToEdit);
+
+            if (contacts != null && contactToEdit.firstName == firstNameToEdit && contactToEdit.lastName == lastNameToEdit)
             {
                 Console.WriteLine("Enter the contact's new first name:");
                 string newFirstName = Console.ReadLine();
@@ -79,14 +88,14 @@ namespace AddressBook
                 Console.WriteLine("Enter the contact's new email:");
                 string newEmail = Console.ReadLine();
 
-                contact.firstName = newFirstName;
-                contact.lastName = newLastName;
-                contact.address = newAddress;
-                contact.city = newCity;
-                contact.state = newState;
-                contact.zipCode = newZipCode;
-                contact.phoneNumber = newPhoneNumber;
-                contact.email = newEmail;
+                contactToEdit.firstName = newFirstName;
+                contactToEdit.lastName = newLastName;
+                contactToEdit.address = newAddress;
+                contactToEdit.city = newCity;
+                contactToEdit.state = newState;
+                contactToEdit.zipCode = newZipCode;
+                contactToEdit.phoneNumber = newPhoneNumber;
+                contactToEdit.email = newEmail;
 
                 Console.WriteLine("Contact updated successfully.");
             }
@@ -99,16 +108,16 @@ namespace AddressBook
 
         public void DeleteContact()
         {
-            if(contact != null)
+            if(contacts != null)
             {
                 Console.WriteLine("Enter the first name of the contact you want to delete:");
-                string firstNameToEdit = Console.ReadLine();
+                string firstNameToDelete = Console.ReadLine();
                 Console.WriteLine("Enter the last name of the contact you want to delete:");
-                string lastNameToEdit = Console.ReadLine();
-
-                if (contact != null && contact.firstName == firstNameToEdit && contact.lastName == lastNameToEdit)
+                string lastNameToDelete = Console.ReadLine();
+                Contact contactToDelete = SearchContact(firstNameToDelete, firstNameToDelete);
+                if (contactToDelete != null && contactToDelete.firstName == firstNameToDelete && contactToDelete.lastName == lastNameToDelete)
                 {
-                    this.contact = null;
+                    contactToDelete = null;
                     Console.Write("\nDeleted Successfully!\n");
                 }
                 else
