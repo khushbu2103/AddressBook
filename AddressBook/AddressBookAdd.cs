@@ -9,6 +9,13 @@ namespace AddressBook
     internal class AddressBookAdd
     {
         public Contact contact;
+
+        public List<Contact> contacts;
+
+        public AddressBookAdd()
+        {
+            contacts = new List<Contact>();
+        }
         public void AddContact()
         {
             Console.WriteLine("please enter first name");
@@ -28,7 +35,7 @@ namespace AddressBook
             Console.WriteLine("please enter email");
             string email = Console.ReadLine();
 
-            this.contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
+            //this.contact = new Contact(firstName, lastName, address, city, state, zipCode, phoneNumber, email);
         }
 
         public void DisplayAdd()
@@ -114,7 +121,18 @@ namespace AddressBook
                 Console.Write("\nNo such person found!\n");
             }
 
-            Console.ReadLine();
+        }
+
+        public Contact SearchContact(string firstName, string lastName)
+        {
+            foreach (Contact contact in contacts)
+            {
+                if (contact.firstName == firstName && contact.lastName == lastName)
+                {
+                    return contact;
+                }
+            }
+            return null;
         }
     }
 }
